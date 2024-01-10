@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: '/pk/',
+    redirect: '/user/vote/all',
     meta: {
       requestAuth: true,
     }
