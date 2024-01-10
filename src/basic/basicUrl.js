@@ -1,0 +1,1 @@
+export const basicUrl = '47.99.134.153:8084'

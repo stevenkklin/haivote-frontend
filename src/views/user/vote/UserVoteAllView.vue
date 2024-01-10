@@ -25,7 +25,7 @@
 <script>
 import * as echarts from "echarts";
 import {onMounted, onUnmounted, reactive} from "vue";
-import axios from "axios";
+import myAxios from "@/basic/myAxios";
 export default {
   name: "echartsBox",
   setup() {
@@ -43,23 +43,13 @@ export default {
 
     let charData = reactive();
     const getAllVote = async () => {
-      await axios.get('http://localhost:8080/api/vote/all')
-          .then(res => {
-            if (res.data.code === 0 ) {
-              console.log("teamOne:" + res.data.data.teamOne)
-              charData = res.data.data;
-              console.log("charData:" + charData.teamOne)
-              console.log("success get all vote result")
-            } else {
-              console.log(res.data.message)
-            }
-          })
-          .catch(() => {
-
-          })
-          .then(() => {
-            console.log("get all vote result")
-          });
+      const res = await myAxios.get(  '/vote/all');
+      if (res.code === 0 ) {
+        console.log("teamOne:" + res.data.teamOne)
+        charData = res.data;
+      } else {
+        console.log(res.message)
+      }
     }
 
     // 基础配置一下Echarts

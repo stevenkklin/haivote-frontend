@@ -1,13 +1,13 @@
 <template>
   <div id="content">
-    <van-address-list v-for="one in list" :key="one.id"
+    <van-address-list
         v-model="chosenAddressId"
         :list="list"
         :disabled-list="disabledList"
         right-icon=""
         default-tag-text="默认"
         add-button-text="投票"
-        @add="onAdd(one.teamNumber)"
+        @add="onAdd(list.find(item => item.id === chosenAddressId).teamNumber)"
     />
   </div>
 
@@ -16,9 +16,9 @@
 
 <script>
 import {ref} from "vue";
-import axios from "axios";
 import * as teamList from "ant-design-vue/es/color-picker/ColorPicker";
 import {showToast} from "vant";
+import myAxios from "@/basic/myAxios";
 
 export default {
   name: "echartsBox",
@@ -80,27 +80,20 @@ export default {
     //   },
     // ];
 
-    const onAdd =  (one) =>{
-       axios.get('http://localhost:8080/api/vote/team', {
+    const onAdd =  async (one) =>{
+      console.log("one:" + one)
+       const res = await myAxios.get('/vote/team', {
          params: {
            teamNumber : one
          }
       })
-          .then(res => {
-            if (res.data.code === 0 ) {
-              console.log("success get all vote result")
-              console.log(teamList.value)
-              showToast('投票成功');
-            } else {
-              console.log(res.data.message)
-            }
-          })
-          .catch(() => {
-
-          })
-          .then(() => {
-            console.log("get all vote result")
-          });
+      if (res.code === 0 ) {
+        console.log("success get all vote result")
+        console.log(teamList.value)
+        showToast('投票成功');
+      } else {
+        console.log(res.message)
+      }
     }
     return {
       list,
