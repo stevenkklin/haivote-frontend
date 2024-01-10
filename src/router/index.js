@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {createRouter, createWebHashHistory} from 'vue-router'
 import NotFound from '../views/error/NotFound';
 import PkIndexView from '../views/pk/PkIndexView';
 import RanklistIndexView from '../views/ranklist/RanklistIndexView';
@@ -108,7 +108,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 })
 
