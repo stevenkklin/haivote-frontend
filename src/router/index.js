@@ -7,7 +7,6 @@ import RecordContentView from "@/views/record/RecordContentView";
 import UserBotIndexView from '../views/user/bot/UserBotIndexView';
 import UserAccountLoginView from "@/views/user/accont/UserAccountLoginView";
 import UserAccountRegisterView from "@/views/user/accont/UserAccountRegisterView";
-import store from '@/store/index'
 import UserVoteAllView from "@/views/user/vote/UserVoteAllView.vue";
 import UserVoteToTeamView from "@/views/user/vote/UserVoteToTeamView.vue";
 
@@ -112,13 +111,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.requestAuth && !store.state.user.is_login) {
-    console.log("toLogin")
-    next({name: "user_vote_all"});
-  } else {
-    next();
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requestAuth && !store.state.user.is_login) {
+//     console.log("toLogin")
+//     next({name: "user_vote_all"});
+//   } else {
+//     next();
+//   }
+// })
 
 export default router
